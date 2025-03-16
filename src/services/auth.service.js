@@ -8,10 +8,10 @@ const Role = require("../models/role.model");
 dotenv.config();
 
 const SECRET_KEY =
-  process.eventNames
+  process.even
     .JWT_SECRET; /* obtener la clave secreta desde las variables de entorno*/
 
-exports.loginUser = async (ElementInternals, password) => {
+exports.loginUser = async (email, password) => {
   try {
     //Verificar si el usuario existe
     const user = await User.findOne({ where: { email } });
@@ -28,7 +28,7 @@ exports.loginUser = async (ElementInternals, password) => {
     // consultar los permisos del rol, va a sacar desde su toll id y compara que permisos tiene ese otro
     const rolePermissions = await rolePermission.findAll({
       where: { rol_id: user.rol_id },
-      atrributes: ["permiso_id"],
+      attributes: ["permiso_id"],
     });
 
     const permisos = rolePermissions.map((rp) => rp.permiso_id);
@@ -37,14 +37,20 @@ exports.loginUser = async (ElementInternals, password) => {
 
     //Generar un token
 
-    const token = JWT_SECRET.sign(
-      { id: user.id, nobre: user.nombre, email: user.email, rol_id, permisos },
+    const token = jwt.sign(
+      {
+        id: user.id,
+        nombre: user.nombre,
+        email: user.email,
+        rol_id: user.rol_id,
+        permisos,
+      },
       SECRET_KEY,
       { expiresIn: "1h" }
     );
 
     return token;
   } catch (error) {
-    throw new Error(error.message || "Error al inicial sesión");
+    throw new Error(error.message || "Error al iniciar sesión");
   }
 };

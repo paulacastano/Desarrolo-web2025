@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
+// Definición del modelo "RolePermission" para la relación entre roles y permisos
 const RolePermission = sequelize.define(
   "roles_permisos",
   {
@@ -8,12 +9,12 @@ const RolePermission = sequelize.define(
     rol_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: "roles", key: "id" },
+      references: { model: "roles", key: "id" }, // Relación con la tabla "roles"
     },
     permiso_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: "permisos", key: "id" },
+      references: { model: "permisos", key: "id" }, // Relación con la tabla "permisos"
     },
   },
   {

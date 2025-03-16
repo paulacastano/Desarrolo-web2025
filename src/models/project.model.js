@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
+// Definición del modelo "Proyect" que representa la tabla "proyectos"
 const Proyect = sequelize.define(
   "proyectos",
   {
@@ -15,12 +16,12 @@ const Proyect = sequelize.define(
     },
   },
   {
-    timestamps: false,
+    timestamps: false, // Desactiva los timestamps automáticos (createdAt, updatedAt)
     tableName: "proyectos",
     hooks: {
       afterCreate: (proyect, options) => {
         if (proyect.fecha_creacion) {
-          proyect.fecha_creacion.setHours(Project.fecha_creacióngetHous() - 5);
+          proyect.fecha_creacion.setHours(proyect.fecha_creación.getHous() - 5);
         }
       },
     },

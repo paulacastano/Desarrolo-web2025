@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
+// Definición del modelo "Role" que representa la tabla "roles"
 const Role = sequelize.define(
   "roles",
   {
@@ -8,8 +9,8 @@ const Role = sequelize.define(
     nombre: { type: DataTypes.STRING, allowNull: false, unique: true },
   },
   {
-    timestamps: false,
-    tableName: "roles",
+    timestamps: false, // No agrega columnas de fecha por defecto
+    tableName: "roles", // Nombre explícito de la tabla en la base de datos
   }
 );
 

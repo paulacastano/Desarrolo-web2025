@@ -1,21 +1,27 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
 
-const UserProject = sequelize.define('usuarios_proyectos', {
+const UserProject = sequelize.define(
+  "usuarios_proyectos",
+  {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     usuario_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: 'usuarios', key: 'id' }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: "usuarios", key: "id" },
+      foreignKey: "usuario_id",
     },
     proyecto_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: 'proyectos', key: 'id' }
-    }
-}, {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: "proyectos", key: "id" },
+      foreignKey: "proyecto_id",
+    },
+  },
+  {
     timestamps: false,
-    tableName: 'usuarios_proyectos',
-});
+    tableName: "usuarios_proyectos",
+  }
+);
 
 module.exports = UserProject;

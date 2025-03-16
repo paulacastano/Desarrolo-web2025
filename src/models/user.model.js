@@ -16,7 +16,7 @@ const User = sequelize.define(
     administrador_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      references: { model: "usuarios", key: "id" },
+      references: { model: "usuarios", key: "id", onDelete: "SET NULL" },
     },
   },
   {
