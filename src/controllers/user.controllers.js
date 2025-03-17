@@ -21,10 +21,6 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.updateuser = async (req, res) => {
-  const { id } = req.params;
-};
-
 // Obtiene todos los usuarios de un administrador
 exports.getAllUserByAdministradorId = async (req, res) => {
   try {
