@@ -28,7 +28,7 @@ CREATE TABLE proyectos (
     FOREIGN KEY (administrador_id) REFERENCES usuarios(id) ON DELETE CASCADE
 ); 
 
-CREATE TABLE usuarios_proyectos (
+CREATE TABLE usuarios_proyecto (
     id SERIAL PRIMARY KEY,
     usuario_id INT NOT NULL,
     proyecto_id INT NOT NULL,

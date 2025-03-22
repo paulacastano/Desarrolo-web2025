@@ -1,8 +1,10 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../config/db");
+const sequelize = require("../config/database");
+const User = require("./user.model");
+const Project = require("./project.model");
 
 const UserProject = sequelize.define(
-  "usuarios_proyectos",
+  "usuarios_proyecto",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     usuario_id: {
@@ -20,8 +22,20 @@ const UserProject = sequelize.define(
   },
   {
     timestamps: false,
-    tableName: "usuarios_proyectos",
+    tableName: "usuarios_proyecto",
   }
 );
+
+User.belongsToMany(Project, {
+  through: UserProject,
+  foreignKey: "usuario_id",
+  as: "proyectos",
+});
+
+Project.belongsToMany(User, {
+  through: UserProject,
+  foreignKey: "proyecto_id",
+  as: "usuarios",
+});
 
 module.exports = UserProject;

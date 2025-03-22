@@ -36,6 +36,17 @@ exports.createUser = async (
   }
 };
 
+exports.getUserById = async (id) => {
+  try {
+    const user = await User.findByPk(id, {
+      attributes: { exclude: ["password"] },
+    });
+    return user;
+  } catch (err) {
+    throw new Error(`Error al obtener el usuario: ${err.message}`);
+  }
+};
+
 exports.getAllUserByAdministradorId = async (administrador_id, email) => {
   try {
     const whereClause = { administrador_id };

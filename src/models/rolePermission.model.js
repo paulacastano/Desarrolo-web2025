@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
 // Definición del modelo "RolePermission" para la relación entre roles y permisos
-const RolePermission = sequelize.define(
+const RolesPermission = sequelize.define(
   "roles_permisos",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -23,4 +23,4 @@ const RolePermission = sequelize.define(
   }
 );
 
-module.exports = RolePermission;
+module.exports = RolesPermission;

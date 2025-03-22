@@ -36,6 +36,15 @@ exports.getAllUserByAdministradorId = async (req, res) => {
   }
 };
 
+exports.getUserById = async (req, res) => {
+  try {
+    const user = await userService.getUserById(req.params.id);
+    res.status(200).json({ message: "Usuario consultado con exito", user });
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener el usuario", error });
+  }
+};
+
 // Obtiene todos los usuarios según el rol
 exports.getAllUserByRolId = async (req, res) => {
   try {
@@ -52,7 +61,7 @@ exports.updateUser = async (req, res) => {
   const { nombre, email, rol_id, administrador_id } = req.body;
   const admin_from_token = req.user.id;
   try {
-    const user = await userService.updateuser(
+    const user = await userService.updateUser(
       id,
       nombre,
       email,
@@ -71,7 +80,7 @@ exports.deleteUser = async (req, res) => {
   const { id } = req.params;
   const admin_from_token = req.user.id;
   try {
-    const result = await userService.deletUser(id, admin_from_token);
+    const result = await userService.deleteUser(id, admin_from_token);
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: err.message });

@@ -2,13 +2,13 @@ const jwt = require("jsonwebtoken"); /* para contraseñas encriptadas*/
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const User = require("../models/user.model");
-const RolePermission = require("../models/rolePermission.model"); /*Estos modelos se conectan con sicualis, es importante tener el modelo de cada tabla*/
+const RolesPermission = require("../models/rolePermission.model"); /*Estos modelos se conectan con sicualis, es importante tener el modelo de cada tabla*/
 const Role = require("../models/role.model");
 
 dotenv.config();
 
 const SECRET_KEY =
-  process.even
+  process.env
     .JWT_SECRET; /* obtener la clave secreta desde las variables de entorno*/
 
 exports.loginUser = async (email, password) => {
@@ -26,7 +26,7 @@ exports.loginUser = async (email, password) => {
       throw new Error("Contraseña incorrecta");
     }
     // consultar los permisos del rol, va a sacar desde su toll id y compara que permisos tiene ese otro
-    const rolePermissions = await rolePermission.findAll({
+    const rolePermissions = await RolesPermission.findAll({
       where: { rol_id: user.rol_id },
       attributes: ["permiso_id"],
     });

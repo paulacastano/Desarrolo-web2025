@@ -1,8 +1,9 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
+const User = require("./user.model");
 
-// Definición del modelo "Proyect" que representa la tabla "proyectos"
-const Proyect = sequelize.define(
+// Definición del modelo "Project" que representa la tabla "proyectos"
+const Project = sequelize.define(
   "proyectos",
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -19,13 +20,24 @@ const Proyect = sequelize.define(
     timestamps: false, // Desactiva los timestamps automáticos (createdAt, updatedAt)
     tableName: "proyectos",
     hooks: {
-      afterCreate: (proyect, options) => {
-        if (proyect.fecha_creacion) {
-          proyect.fecha_creacion.setHours(proyect.fecha_creación.getHous() - 5);
+      afterCreate: (project, options) => {
+        if (project.fecha_creacion) {
+          project.fecha_creacion.setHours(
+            project.fecha_creacion.getHours() - 5
+          );
         }
       },
     },
   }
 );
 
-module.exports = Proyect;
+Project.belongsTo(User, {
+  foreignKey: "administrador_id",
+});
+
+User.hasMany(Project, {
+  foreignKey: "administrador_id",
+  as: "proyectos_administrados",
+});
+
+module.exports = Project;

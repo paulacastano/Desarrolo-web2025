@@ -17,9 +17,9 @@ const projectRoutes = require("./routes/project.routes");
 //Estableciendo un prefijo común para las rutas: "/api/v1/"
 //Se recomienda definir rutas más específicas para mayor claridad
 
-app.use("/api/v1/user", userRoutes);
-app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/projects", projectRoutes);
+app.use("/api/v1", userRoutes);
+app.use("/api/v1", authRoutes);
+app.use("/api/v1", projectRoutes);
 
 // **Corrección: Se agrega la definición del puerto con un mensaje para saber si el servidor está corriendo**
 const PORT = process.env.PORT || 3000;

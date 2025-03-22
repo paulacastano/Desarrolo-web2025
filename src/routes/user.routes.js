@@ -15,31 +15,33 @@ const errorHandler = require("../middlewares/error.middleware");
 router.post(
   "/users/create",
   authenticateToken,
-  checkRole(ROLES.ADMIN),
+  checkRole([ROLES.ADMIN]),
   userController.createUser
 );
+
 router.put(
   "/users/update/:id",
   authenticateToken,
-  checkRole(ROLES.ADMIN),
+  checkRole([ROLES.ADMIN]),
   userController.updateUser
 );
+
 router.get(
-  "/users",
+  "/users/roles/:id",
   authenticateToken,
-  checkRole(ROLES.ADMIN),
-  userController.getUsers
+  checkRole([ROLES.ADMIN]),
+  userController.getAllUserByRolId
 );
 router.delete(
   "/users/delete/:id",
   authenticateToken,
-  checkRole(ROLES.ADMIN),
+  checkRole([ROLES.ADMIN]),
   userController.deleteUser
 );
 router.get(
   "/users/:id",
   authenticateToken,
-  checkRole(ROLES.ADMIN),
+  checkRole([ROLES.ADMIN]),
   userController.getUserById
 );
 
