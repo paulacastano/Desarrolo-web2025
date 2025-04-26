@@ -2,7 +2,10 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const User = require("./user.model");
 
-// Definición del modelo "Project" que representa la tabla "proyectos"
+/**
+ * Definición del modelo "Project" que representa la tabla "proyectos".
+ * Cada proyecto tiene un nombre, descripción, fecha de creación y un administrador asignado.
+ */
 const Project = sequelize.define(
   "proyectos",
   {
@@ -31,13 +34,20 @@ const Project = sequelize.define(
   }
 );
 
+/**
+ * Relación: Un proyecto pertenece a un usuario (administrador).
+ */
 Project.belongsTo(User, {
   foreignKey: "administrador_id",
 });
 
+/**
+ * Relación: Un usuario puede administrar varios proyectos.
+ */
 User.hasMany(Project, {
   foreignKey: "administrador_id",
   as: "proyectos_administrados",
 });
 
+//// Exporta el modelo Project
 module.exports = Project;

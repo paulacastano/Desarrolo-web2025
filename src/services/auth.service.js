@@ -46,7 +46,7 @@ exports.loginUser = async (email, password) => {
         permisos,
       },
       SECRET_KEY,
-      { expiresIn: "1h" }
+      { expiresIn: "12h" }
     );
 
     return token;

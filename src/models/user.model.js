@@ -1,6 +1,10 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
+/**
+ * Definición del modelo "User" que representa la tabla "usuarios".
+ * Cada usuario tiene un nombre, correo electrónico, contraseña, rol y opcionalmente un administrador asociado.
+ */
 const User = sequelize.define(
   "usuarios",
   {

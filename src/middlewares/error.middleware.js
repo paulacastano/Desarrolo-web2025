@@ -1,3 +1,8 @@
+/**
+ * Middleware de manejo de errores.
+ * Captura errores del servidor y responde con un mensaje y el detalle del error.
+ */
+
 const errorHandler = (err, req, res, next) => {
   //console.error(err.stack);
   res.status(500).json({ message: "Algo salio mal", error: err.message });
